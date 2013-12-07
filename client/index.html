@@ -1,0 +1,74 @@
+<head>
+  <title>Who Was There?</title>
+  <link href="/lib/semantic/css/semantic.min.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+    <div class="ui red inverted menu">
+      <a class="active item">
+        <i class="home icon"></i> Home
+      </a>
+      <a class="item">
+        <i class="mail icon"></i> Messages
+      </a>
+      <div class="right menu">
+        <div class="item" style="padding-top: 7px;padding-bottom: 5px;">
+          {{loginButtons}}
+        </div>
+      </div>
+    </div>
+
+    <br />
+    <div class="ui grid"> 
+    {{> content}}
+    {{> posts}}
+    </div>
+
+</body>
+
+<template name="user">
+  <div>
+    <img src="{{services.twitter.profile_image_url}}" class="ui avatar image">
+    <strong>{{profile.name}}</strong>
+  </div>
+  
+  <div style="overflow:hidden">
+    <iframe style="width: 300px; height: 20px;" src="//platform.twitter.com/widgets/follow_button.html?screen_name={{services.twitter.screenName}}" height="240" width="320" frameborder="0" scrolling="yes">
+    </iframe>
+  </div>
+</template>
+
+<template name="content">
+    <div class="four wide column">
+      <div class="ui segment">
+      {{#each users}}
+        {{> user}}
+      {{/each}}
+      </div>
+    </div>
+</template>
+
+<template name="posts">
+  <div class="ten wide column">
+    <div class="ui form">
+      <div class="field">
+        <label>Message</label>
+        <input type="text" id="msg" name="msg">
+        {{> submitMsg}}
+      </div>
+    </div>
+    <div class="ui segment">
+    {{#each posts}}
+     {{> post}}
+    {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="submitMsg">
+  <a class="ui red button">Red Button</a>
+</template>
+
+<template name="post">
+  <p><strong>{{name}}:</strong> {{message}} </p>
+</template>
